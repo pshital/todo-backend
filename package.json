@@ -5,6 +5,7 @@
   "main": "tasks.js",
   "dependencies": {
     "express": "^4.17.0",
+    "mysql": "^2.17.1",
     "serverless-http": "^2.0.2"
   },
   "devDependencies": {},
