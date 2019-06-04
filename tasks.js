@@ -1,16 +1,17 @@
 const express = require("express");
 const serverless = require("serverless-http");
-const mysql= require("mysql")
-const app=express();
+const mysql = require("mysql")
+const app = express();
 
+app.use(express.json());
 const connection = mysql.createConnection({
   host: process.env.DB_HOST,
   user: process.env.DB_USER,
   password: process.env.DB_PASSWORD,
   database: "todotask"
 });
-app.get("/tasks", function(request, response) {
- // const username = request.query.username;
+app.get("/tasks", function (request, response) {
+  // const username = request.query.username;
   let queryToExcute = "SELECT * FROM Task";
   /*if (username) {
     query =
@@ -30,5 +31,10 @@ app.get("/tasks", function(request, response) {
     }
   });
 });
+app.post("/tasks", function (request, response) {
 
+   
+
+  console.log(request.body);
+})
 module.exports.handler = serverless(app);
