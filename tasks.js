@@ -31,10 +31,24 @@ app.get("/tasks", function (request, response) {
     }
   });
 });
-app.post("/tasks", function (request, response) {
 
-   
+  app.post("/tasks", function (request, response) {
+    const TaskToBeSend = request.body;
+    //console.log(request.body);
+    connection.query('INSERT  INTO Task SET ?', TaskToBeSend, function (error, results, fields) {
+      if (error) {
+        console.log("Error saving tasks", error);
+        response.status(500).json({
+          error: error
+        });
+      }
+      else {
+        response.json({
+          TaskId: results.insertId
+        });
+      }
 
-  console.log(request.body);
-})
-module.exports.handler = serverless(app);
+    });
+  });
+
+  module.exports.handler = serverless(app);
